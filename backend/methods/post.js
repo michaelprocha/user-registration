@@ -11,7 +11,7 @@ export default function postUser(res, req) {
 		const query = "INSERT INTO users (first_name, last_name, date_birth) VALUES (?, ?, ?)";
 		db.query(query, [first_name, last_name, date_birth], (e, result) => {
 			if (e) {
-				console.error(`Erro na busca: ${e.message}`);
+				console.error(`Erro ao postar: ${e.message}`);
                 res.statusCode = 500;
                 res.setHeader("Content-type", "text/plain; charset=utf-8");
                 res.statusMessage = "Erro no banco de dados";
@@ -19,7 +19,7 @@ export default function postUser(res, req) {
 				return;
 			}
 			res.statusCode = 201;
-			res.statusMessage = "Conteudo disponivel!";
+			res.statusMessage = "Conteudo postado!";
 			res.setHeader("Content-type", "application/json; charset=utf-8");
 			res.end(JSON.stringify(result));
 		});
